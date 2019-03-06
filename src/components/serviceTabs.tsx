@@ -1,5 +1,8 @@
+// @Author: sarahnouh
+// @Date:   2019-03-04
+// @Last modified by:   sarahnouh
+// @Last modified time: 2019-03-04
 import React, { Component } from "react";
-
 import { IndividualServiceData } from "../interfaces/individualServiceData";
 import { ServiceTabsData } from "../interfaces/serviceTabsData";
 import PaginatedCards from "./paginatedCards";
@@ -22,9 +25,7 @@ class ServiceTabs extends Component<serviceTabsProps, serviceTabsState> {
     //initializing the arrays for setting the active tabs
     let activeTabState: string[] = [];
     let activeTabContentState: string[] = [];
-    //if lang is arabic: set last tab to be the first active one
-    //if lang is eng: set first tab to be the first active one
-    // let initialIndex = props.language === "ar" ? props.tabsData.length - 1 : 0;
+
     for (let i = 0; i < props.tabsData.length; i++) {
       activeTabState[i] = "";
       activeTabContentState[i] = "";
@@ -36,6 +37,10 @@ class ServiceTabs extends Component<serviceTabsProps, serviceTabsState> {
       activeTabContent: activeTabContentState
     };
   }
+  /**
+   * A function invoked whenever the component received props from parent
+   * @param {}
+   */
   componentWillReceiveProps(props: serviceTabsProps) {
     if (this.props.language !== props.language) {
       let activeTabState: string[] = [];
@@ -53,6 +58,10 @@ class ServiceTabs extends Component<serviceTabsProps, serviceTabsState> {
       });
     }
   }
+  /**
+   * A function invoked on tab click to handle toggling tabs
+   * @param {index} index the index of the new current tab
+   */
   handleTabChange = (index: number) => {
     //reset previous state first
     let activeTabState: string[] = [];

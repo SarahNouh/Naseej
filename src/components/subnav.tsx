@@ -1,3 +1,7 @@
+// @Author: sarahnouh
+// @Date:   2019-03-04
+// @Last modified by:   sarahnouh
+// @Last modified time: 2019-03-04
 import React, { Component } from "react";
 interface subnavProps {
   /**
@@ -17,17 +21,44 @@ interface subnavProps {
   searchPlaceholder: string;
 }
 interface subnavState {
+  /**
+   *A boolean to toggle search form on click
+   *@type boolean
+   */
   showSearch: boolean;
+  /**
+   *A boolean used to add background after certain vertical scroll position
+   *@type boolean
+   */
+  hasBackground: boolean;
 }
 class SubNav extends Component<subnavProps, subnavState> {
   constructor(props: subnavProps) {
     super(props);
     this.state = {
-      showSearch: false
+      showSearch: false,
+      hasBackground: false
     };
   }
-  /** A function Invoked on click to handle toggling language
-   *
+  /**
+   * A function invoked when the component is mounted
+   * @param {}
+   */
+  componentDidMount() {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 540) {
+        this.setState({
+          hasBackground: true
+        });
+      } else {
+        this.setState({
+          hasBackground: false
+        });
+      }
+    });
+  }
+  /**
+   * A function Invoked on click to handle toggling language
    * @param {}
    * @public
    */
@@ -35,6 +66,11 @@ class SubNav extends Component<subnavProps, subnavState> {
     this.props.handleLanguageChange();
   };
 
+  /**
+   * A function Invoked on click to handle toggling search form
+   * @param {}
+   * @public
+   */
   handleShowSearch = () => {
     this.setState({
       showSearch: !this.state.showSearch
@@ -42,7 +78,12 @@ class SubNav extends Component<subnavProps, subnavState> {
   };
   render() {
     return (
-      <ul className="subnav nav fixed-top justify-content-end">
+      <ul
+        className={
+          "subnav nav fixed-top justify-content-end " +
+          (this.state.hasBackground ? "has-background" : "")
+        }
+      >
         <li className="nav-item ">
           <a
             className="nav-link subnav-lang"

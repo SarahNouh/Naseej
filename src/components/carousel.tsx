@@ -1,14 +1,29 @@
+// @Author: sarahnouh
+// @Date:   2019-03-04
+// @Last modified by:   sarahnouh
+// @Last modified time: 2019-03-04
 import React, { Component } from "react";
 import { CarouselData } from "../interfaces/carouselData";
 import sliderBackgroundImage from "../images/slider-image.png";
 import slideImage from "../images/slide-image.png";
-import * as $ from "jquery";
 
 interface CarouselProps {
+  /**
+   *The data of the slides in the carousel
+   *@type CarouselData
+   */
   carouselData: CarouselData;
+  /**
+   *A string that indicates the current language
+   *@type string
+   */
   language: string;
 }
 interface CarouselState {
+  /**
+   *An array that indicates the current active slide and indicators
+   *@type string[]
+   */
   activeSlide: string[];
 }
 
@@ -19,9 +34,12 @@ class Carousel extends Component<CarouselProps, CarouselState> {
       activeSlide: ["active", "", ""]
     };
   }
-  componentDidMount() {
-    // $(".carousel").addClass("z");
-  }
+  /**
+   * A temporary solution to handle sliding carousels
+   * As current version of react and bootstrap are crashing and some of bootstrap's javascript behaviour is not working
+   * will use react-bootstrap instead
+   * @param {index} index of current slide
+   */
   handleSlide = (index: number) => {
     let activeState = ["", "", ""];
     activeState[index] = "active";

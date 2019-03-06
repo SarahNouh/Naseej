@@ -1,20 +1,43 @@
+// @Author: sarahnouh
+// @Date:   2019-03-04
+// @Last modified by:   sarahnouh
+// @Last modified time: 2019-03-04
 import React, { Component } from "react";
 import { IndividualServiceData } from "../interfaces/individualServiceData";
 interface PaginatedCardsProps {
   individualServiceData: IndividualServiceData[];
+  /**
+   *The text of the footer of the cards
+   *@type string
+   */
   cardFooterText: string;
+  /**
+   *Indicates the current language
+   *@type string
+   */
   language: string;
 }
 interface PaginatedCardsState {
+  /**
+   *The current data displayed per tab (individual service tab)
+   *@type boolean
+   */
   currentIndividualServiceItems: IndividualServiceData[];
-  //the number of items in the page
+  /**
+   *Indicates the number of cards per page
+   *depends on screen size
+   *@type number
+   */
   itemsCount: number;
 }
 class PaginatedCards extends Component<
   PaginatedCardsProps,
   PaginatedCardsState
 > {
-  //the max index of the items in the current page
+  /**
+   *the max index of the cards in the current page within the current tab
+   *@type number
+   */
   currentItemsIndex: number;
   constructor(props: PaginatedCardsProps) {
     super(props);
@@ -37,6 +60,10 @@ class PaginatedCards extends Component<
       itemsCount: count
     };
   }
+  /**
+   * A function invoked when the component is mounted
+   * @param {}
+   */
   componentDidMount() {
     window.addEventListener("resize", () => {
       let currentItems: IndividualServiceData[] = [];
@@ -57,6 +84,10 @@ class PaginatedCards extends Component<
       });
     });
   }
+  /**
+   * A function invoked whenever the component received props from parent
+   * @param {}
+   */
   componentWillReceiveProps(props: PaginatedCardsProps) {
     if (props.cardFooterText !== this.props.cardFooterText) {
       //if the language has changed
@@ -77,6 +108,10 @@ class PaginatedCards extends Component<
       });
     }
   }
+  /**
+   * A function invoked on click to handle loading next items per tab
+   * @param {}
+   */
   handleGetNextItems = () => {
     //if the new max index is still less the data length
     if (this.currentItemsIndex < this.props.individualServiceData.length) {
@@ -98,6 +133,10 @@ class PaginatedCards extends Component<
       });
     }
   };
+  /**
+   * A function invoked on click to handle loading previous items per tab
+   * @param {}
+   */
   handleGetPreviousItems = () => {
     //calcuate the new max index
     //if the index  is less than the items count -> set it to the item's count

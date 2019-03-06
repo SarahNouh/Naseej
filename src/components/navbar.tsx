@@ -1,20 +1,39 @@
+// @Author: sarahnouh
+// @Date:   2019-03-04
+// @Last modified by:   sarahnouh
+// @Last modified time: 2019-03-04
 import React, { Component } from "react";
 import logo from "../images/logo.png";
 import { NavData } from "../interfaces/navData";
 
 interface NavbarProps {
+  /**
+   * the navigation text of each item
+   *@type string
+   */
   navbarData: NavData;
+  /**
+   * Current Language
+   *@type string
+   */
   language: string;
 }
 interface NavbarState {
-  //a boolean to toggle navbar in mobile screens
-
+  /**
+   * boolean to toggle navbar in mobile screens
+   *@type boolean
+   */
   showNavbar: boolean;
+  /**
+   *Adding background to navbar after certain scroll position
+   *@type boolean
+   */
+  navbarBackground: boolean;
 }
 class Navbar extends React.Component<NavbarProps, NavbarState> {
   constructor(props: NavbarProps) {
     super(props);
-    this.state = { showNavbar: false };
+    this.state = { showNavbar: false, navbarBackground: false };
   }
 
   /**
@@ -29,12 +48,31 @@ class Navbar extends React.Component<NavbarProps, NavbarState> {
       showNavbar: !this.state.showNavbar
     });
   };
+
+  /**
+   * A function invoked when the component is mounted
+   * @param {}
+   */
+  componentDidMount() {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 560) {
+        this.setState({
+          navbarBackground: true
+        });
+      } else {
+        this.setState({
+          navbarBackground: false
+        });
+      }
+    });
+  }
   render() {
     return (
       <nav
         className={
           "navbar navbar-expand-md navbar-dark fixed-top " +
-          this.props.language.toLowerCase()
+          this.props.language.toLowerCase() +
+          (this.state.navbarBackground ? " has-background" : "")
         }
       >
         <a className="navbar-brand " href="#">
