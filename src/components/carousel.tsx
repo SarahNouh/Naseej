@@ -68,6 +68,12 @@ class Carousel extends Component<CarouselProps, CarouselState> {
               src={sliderBackgroundImage}
               className="d-block carousel-background "
               alt="..."
+              onError={e => {
+                let target: any = e.target;
+                target.onerror = null;
+                target.src =
+                  "https://via.placeholder.com/1000x800.png?text=NoImage";
+              }}
             />
             <div className="carousel-content">
               <div className="row">
@@ -99,6 +105,12 @@ class Carousel extends Component<CarouselProps, CarouselState> {
               src={sliderBackgroundImage}
               className="d-block carousel-background"
               alt="..."
+              onError={e => {
+                let target: any = e.target;
+                target.onerror = null;
+                target.src =
+                  "https://via.placeholder.com/1000x800.png?text=NoImage";
+              }}
             />
           </div>
           <div className={"carousel-item " + this.state.activeSlide[2]}>
@@ -106,6 +118,12 @@ class Carousel extends Component<CarouselProps, CarouselState> {
               src={sliderBackgroundImage}
               className="d-block carousel-background"
               alt="..."
+              onError={e => {
+                let target: any = e.target;
+                target.onerror = null;
+                target.src =
+                  "https://via.placeholder.com/1000x800.png?text=NoImage";
+              }}
             />
           </div>
         </div>
