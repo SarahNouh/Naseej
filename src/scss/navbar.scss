@@ -1,14 +1,39 @@
 // @Author: sarahnouh
 // @Date:   2019-03-04T03:32:40+02:00
 // @Last modified by:   sarahnouh
-// @Last modified time: 2019-03-04T17:10:49+02:00
+// @Last modified time: 2019-03-06T08:26:43+02:00
 .navbar {
   top: 50px;
+
+  @include media-breakpoint-down(md) {
+    top: 40px;
+  }
+  @include media-breakpoint-down(sm) {
+    top: 0;
+  }
+  .navbar-collapse.show {
+    background-color: $darkGray;
+    padding: 10px;
+  }
+  .navbar-brand {
+    @include media-breakpoint-down(md) {
+      width: 150px;
+      img {
+        @include media-breakpoint-down(md) {
+          width: 100%;
+        }
+      }
+    }
+  }
   .navbar-nav {
     border-top: 1px solid #ffffff47;
     border-bottom: 1px solid #ffffff47;
+
     .nav-link {
       color: rgb(255, 255, 255);
+      @include media-breakpoint-down(md) {
+        font-size: 10px;
+      }
     }
   }
 }

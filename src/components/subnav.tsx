@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "../scss/subnav.scss";
 interface subnavProps {
   /**
    *A function that handles changing the language from the parent
@@ -43,12 +42,7 @@ class SubNav extends Component<subnavProps, subnavState> {
   };
   render() {
     return (
-      <ul
-        className={
-          "subnav nav fixed-top " +
-          (this.props.language === "AR" ? "justify-content-end" : "")
-        }
-      >
+      <ul className="subnav nav fixed-top justify-content-end">
         <li className="nav-item ">
           <a
             className="nav-link subnav-lang"
@@ -60,7 +54,7 @@ class SubNav extends Component<subnavProps, subnavState> {
             {this.props.language}
           </a>
         </li>
-        <li className="nav-item">
+        <li className="nav-item d-none d-md-block">
           <a className="nav-link" href="#">
             <svg width="0.278in" height="0.25in">
               <path
@@ -71,7 +65,7 @@ class SubNav extends Component<subnavProps, subnavState> {
             </svg>
           </a>
         </li>
-        <li className="nav-item">
+        <li className="nav-item d-none d-md-block">
           <a className="nav-link" href="#">
             <svg width="0.292in" height="0.194in">
               <path
@@ -82,7 +76,7 @@ class SubNav extends Component<subnavProps, subnavState> {
             </svg>
           </a>
         </li>
-        <li className="nav-item">
+        <li className="nav-item d-none d-md-block">
           <a className="nav-link" href="#">
             <svg width="0.264in" height="0.25in">
               <path

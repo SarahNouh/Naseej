@@ -3,7 +3,6 @@ import React, { Component } from "react";
 import { IndividualServiceData } from "../interfaces/individualServiceData";
 import { ServiceTabsData } from "../interfaces/serviceTabsData";
 import PaginatedCards from "./paginatedCards";
-import "../scss/serviceTabs.scss";
 
 interface serviceTabsProps {
   headerTitle: string;
@@ -25,13 +24,13 @@ class ServiceTabs extends Component<serviceTabsProps, serviceTabsState> {
     let activeTabContentState: string[] = [];
     //if lang is arabic: set last tab to be the first active one
     //if lang is eng: set first tab to be the first active one
-    let initialIndex = props.language === "ar" ? props.tabsData.length - 1 : 0;
+    // let initialIndex = props.language === "ar" ? props.tabsData.length - 1 : 0;
     for (let i = 0; i < props.tabsData.length; i++) {
       activeTabState[i] = "";
       activeTabContentState[i] = "";
     }
-    activeTabState[initialIndex] = "active";
-    activeTabContentState[initialIndex] = "show active";
+    activeTabState[0] = "active";
+    activeTabContentState[0] = "show active";
     this.state = {
       activeTab: activeTabState,
       activeTabContent: activeTabContentState
@@ -41,17 +40,13 @@ class ServiceTabs extends Component<serviceTabsProps, serviceTabsState> {
     if (this.props.language !== props.language) {
       let activeTabState: string[] = [];
       let activeTabContentState: string[] = [];
-      //if lang is arabic: set last tab to be the first active one
-      //if lang is eng: set first tab to be the first active one
-      let initialIndex =
-        props.language === "ar" ? props.tabsData.length - 1 : 0;
+
       for (let i = 0; i < props.tabsData.length; i++) {
         activeTabState[i] = "";
         activeTabContentState[i] = "";
       }
-      // let index = this.state.activeTab.findIndex(elm => elm === "active");
-      activeTabState[initialIndex] = "active";
-      activeTabContentState[initialIndex] = "show active";
+      activeTabState[0] = "active";
+      activeTabContentState[0] = "show active";
       this.setState({
         activeTab: activeTabState,
         activeTabContent: activeTabContentState
@@ -77,32 +72,18 @@ class ServiceTabs extends Component<serviceTabsProps, serviceTabsState> {
 
   render() {
     return (
-      <div className={this.props.language}>
+      <div className={"service-tabs-section " + this.props.language}>
         <div className="services-header container-fluid">
-          {this.props.language === "ar" ? (
-            <button className="btn services-btn" type="button">
-              {this.props.headerBtn}
-            </button>
-          ) : (
-            <h4>{this.props.headerTitle}</h4>
-          )}
+          <h4>{this.props.headerTitle}</h4>
+
           <hr />
-          {this.props.language === "ar" ? (
-            <h4>{this.props.headerTitle}</h4>
-          ) : (
-            <button className="btn services-btn" type="button">
-              {this.props.headerBtn}
-            </button>
-          )}
+
+          <button className="btn services-btn" type="button">
+            {this.props.headerBtn}
+          </button>
         </div>
 
-        <ul
-          className={
-            "nav nav-tabs service-tabs " +
-            (this.props.language === "ar" ? " justify-content-end" : "")
-          }
-          role="tablist"
-        >
+        <ul className="nav nav-tabs service-tabs " role="tablist">
           {this.props.tabsData.map((tab, i) => {
             return (
               <li className="nav-item" key={i}>

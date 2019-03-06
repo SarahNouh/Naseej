@@ -1,15 +1,19 @@
 // @Author: sarahnouh
 // @Date:   1985-10-26T10:15:00+02:00
 // @Last modified by:   sarahnouh
-// @Last modified time: 2019-03-05T01:40:30+02:00
-
-// @import "./scss/carousel.scss";
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+// @Last modified time: 2019-03-06T08:40:08+02:00
+$gray: #848484;
+$lightGray: #c1c1c1;
+$snowWhite: #e7e7e7;
+$darkGray: #231f20;
+$maroon: #a31f21;
+$lightMaroon: #dcb5b6;
+@import "~bootstrap/scss/bootstrap.scss";
+@import "./scss/carousel.scss";
+@import "./scss/navbar.scss";
+@import "./scss/paginated-cards.scss";
+@import "./scss/service-tabs.scss";
+@import "./scss/subnav.scss";
+.ar {
+  direction: rtl;
 }

@@ -205,7 +205,7 @@ class App extends Component<AppProps, AppState> {
   };
   render() {
     return (
-      <div className="">
+      <div className={this.state.arabic ? "ar" : ""}>
         <SubNav
           handleLanguageChange={() => {
             this.handleLanguageChange();
@@ -225,13 +225,14 @@ class App extends Component<AppProps, AppState> {
               ? this.carouselArabicData
               : this.carouselEnglishData
           }
+          language={this.state.arabic ? "ar" : "en"}
         />
         <ServiceTabs
           headerTitle={this.state.arabic ? "فهرس الخدمات" : "Services Section"}
           headerBtn={this.state.arabic ? "جميع الخدمات" : "All Services"}
           tabsData={
             this.state.arabic
-              ? this.serviceTabsArabicData.reverse()
+              ? this.serviceTabsArabicData
               : this.serviceTabsEnglishData
           }
           individualServiceData={

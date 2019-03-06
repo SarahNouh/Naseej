@@ -1,13 +1,8 @@
 // @Author: sarahnouh
 // @Date:   2019-03-05T06:53:40+02:00
 // @Last modified by:   sarahnouh
-// @Last modified time: 2019-03-05T20:30:45+02:00
-$gray: #848484;
-$lightGray: #c1c1c1;
-$snowWhite: #e7e7e7;
-$darkGray: #231f20;
-$maroon: #a31f21;
-$lightMaroon: #dcb5b6;
+// @Last modified time: 2019-03-06T08:03:31+02:00
+
 .services-card {
   margin-top: 30px;
   margin-bottom: 30px;
@@ -27,6 +22,7 @@ $lightMaroon: #dcb5b6;
     a {
       color: $maroon;
       font-weight: 500;
+      font-size: 15px;
     }
     svg {
       fill: $maroon;
@@ -80,8 +76,14 @@ $lightMaroon: #dcb5b6;
   }
   &.left {
     left: 20px;
+    @include media-breakpoint-down(sm) {
+      left: 10px;
+    }
   }
   &.right {
     right: 20px;
+    @include media-breakpoint-down(sm) {
+      right: 10px;
+    }
   }
 }

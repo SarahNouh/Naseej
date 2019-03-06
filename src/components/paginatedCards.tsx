@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { IndividualServiceData } from "../interfaces/individualServiceData";
-import "../scss/paginated-cards.scss";
 interface PaginatedCardsProps {
   individualServiceData: IndividualServiceData[];
   cardFooterText: string;
@@ -8,31 +7,62 @@ interface PaginatedCardsProps {
 }
 interface PaginatedCardsState {
   currentIndividualServiceItems: IndividualServiceData[];
+  //the number of items in the page
+  itemsCount: number;
 }
 class PaginatedCards extends Component<
   PaginatedCardsProps,
   PaginatedCardsState
 > {
+  //the max index of the items in the current page
   currentItemsIndex: number;
   constructor(props: PaginatedCardsProps) {
     super(props);
     this.currentItemsIndex = 4;
     let currentItems: IndividualServiceData[] = [];
-    //load initial four items
-    for (let i = 0; i < 4; i++) {
+    let count = 4;
+    if (window.innerWidth > 425 && window.innerWidth <= 768) {
+      count = 2;
+      this.currentItemsIndex = 2;
+    } else if (window.innerWidth <= 425) {
+      count = 1;
+      this.currentItemsIndex = 1;
+    }
+    //load initial  items
+    for (let i = 0; i < count; i++) {
       currentItems.push(props.individualServiceData[i]);
     }
     this.state = {
-      currentIndividualServiceItems: currentItems
+      currentIndividualServiceItems: currentItems,
+      itemsCount: count
     };
   }
+  componentDidMount() {
+    window.addEventListener("resize", () => {
+      let currentItems: IndividualServiceData[] = [];
 
+      let count = 4;
+      if (window.innerWidth > 425 && window.innerWidth <= 768) {
+        count = 2;
+      } else if (window.innerWidth <= 425) {
+        count = 1;
+      }
+      for (let i = 0; i < count; i++) {
+        currentItems.push(this.props.individualServiceData[i]);
+      }
+
+      this.setState({
+        currentIndividualServiceItems: currentItems,
+        itemsCount: count
+      });
+    });
+  }
   componentWillReceiveProps(props: PaginatedCardsProps) {
     if (props.cardFooterText !== this.props.cardFooterText) {
       //if the language has changed
       //push the new data to be displayed
       let currentItems: IndividualServiceData[] = [];
-
+      //update current items displayed
       for (
         let i = this.currentItemsIndex - 4;
         i < this.currentItemsIndex;
@@ -41,46 +71,50 @@ class PaginatedCards extends Component<
         if (props.individualServiceData[i] !== undefined)
           currentItems.push(props.individualServiceData[i]);
       }
-      //reverse items in case it was arabic
-      props.language === "ar" ? currentItems.reverse() : null;
+
       this.setState({
         currentIndividualServiceItems: currentItems
       });
     }
   }
   handleGetNextItems = () => {
+    //if the new max index is still less the data length
     if (this.currentItemsIndex < this.props.individualServiceData.length) {
       let currentItems: IndividualServiceData[] = [];
-
+      //get the next set of items
       for (
         let i = this.currentItemsIndex;
-        i < this.currentItemsIndex + 4;
+        i < this.currentItemsIndex + this.state.itemsCount;
         i++
       ) {
         if (this.props.individualServiceData[i] !== undefined)
           currentItems.push(this.props.individualServiceData[i]);
       }
-      this.currentItemsIndex += 4;
-      //reverse items in case it was arabic
-      this.props.language === "ar" ? currentItems.reverse() : null;
+      //update the max index
+      this.currentItemsIndex += this.state.itemsCount;
+
       this.setState({
         currentIndividualServiceItems: currentItems
       });
     }
   };
   handleGetPreviousItems = () => {
+    //calcuate the new max index
+    //if the index  is less than the items count -> set it to the item's count
+    //else subtract the count from it to get the previous set
     let newIndex =
-      this.currentItemsIndex - 4 < 4 ? 4 : this.currentItemsIndex - 4;
+      this.currentItemsIndex - this.state.itemsCount < this.state.itemsCount
+        ? this.state.itemsCount
+        : this.currentItemsIndex - this.state.itemsCount;
     if (this.currentItemsIndex !== newIndex) {
       let currentItems: IndividualServiceData[] = [];
 
-      for (let i = newIndex - 4; i < newIndex; i++) {
+      for (let i = newIndex - this.state.itemsCount; i < newIndex; i++) {
         if (this.props.individualServiceData[i] !== undefined)
           currentItems.push(this.props.individualServiceData[i]);
       }
       this.currentItemsIndex = newIndex;
-      //reverse items in case it was arabic
-      this.props.language === "ar" ? currentItems.reverse() : null;
+
       this.setState({
         currentIndividualServiceItems: currentItems
       });
@@ -100,14 +134,10 @@ class PaginatedCards extends Component<
         >
           <path d="M30.910,16.031 L21.331,25.611 L30.910,35.191 C31.556,35.836 31.556,36.886 30.910,37.534 C30.263,38.179 29.213,38.179 28.567,37.534 L17.823,26.787 C17.497,26.461 17.335,26.034 17.338,25.611 C17.338,25.183 17.497,24.760 17.823,24.432 L28.567,13.689 C29.213,13.041 30.263,13.041 30.910,13.689 C31.556,14.336 31.556,15.384 30.910,16.031 ZM50.224,25.491 C50.224,39.149 39.150,50.226 25.492,50.226 C11.831,50.229 0.758,39.154 0.758,25.491 C0.758,11.830 11.831,0.757 25.489,0.757 C39.150,0.757 50.224,11.830 50.224,25.491 L50.224,25.491 ZM4.071,25.491 C4.071,37.301 13.682,46.912 25.489,46.912 C37.298,46.912 46.907,37.301 46.907,25.491 C46.911,13.681 37.301,4.070 25.489,4.070 C13.682,4.070 4.071,13.681 4.071,25.491 Z" />
         </svg>
-        <div
-          className={
-            "row " + (this.props.language === "ar" ? "justify-content-end" : "")
-          }
-        >
+        <div className="row ">
           {this.state.currentIndividualServiceItems.map((item, i) => {
             return (
-              <div className="col-3" key={i}>
+              <div className="col-12 col-md-6 col-lg-3" key={i}>
                 <div className="services-card">
                   <div className="card-content">
                     <h5 className="card-title">{item.title}</h5>
