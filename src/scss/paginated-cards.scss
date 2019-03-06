@@ -1,0 +1,87 @@
+// @Author: sarahnouh
+// @Date:   2019-03-05T06:53:40+02:00
+// @Last modified by:   sarahnouh
+// @Last modified time: 2019-03-05T20:30:45+02:00
+$gray: #848484;
+$lightGray: #c1c1c1;
+$snowWhite: #e7e7e7;
+$darkGray: #231f20;
+$maroon: #a31f21;
+$lightMaroon: #dcb5b6;
+.services-card {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  border: 2px solid $lightGray;
+  border-radius: 7px;
+  .card-content {
+    padding: 10px;
+
+    .card-title {
+      color: $darkGray;
+    }
+  }
+  .card-footer {
+    background-color: $snowWhite;
+    border-top: none;
+    position: relative;
+    a {
+      color: $maroon;
+      font-weight: 500;
+    }
+    svg {
+      fill: $maroon;
+      position: absolute;
+      top: 50%;
+      width: 30px;
+    }
+    .manual-icon {
+      right: 12px;
+      margin-top: -12px;
+      height: 24px;
+    }
+    .electronic-icon {
+      position: absolute;
+      right: 45px;
+      margin-top: -8px;
+      height: 20px;
+    }
+  }
+  &:hover {
+    border-color: $maroon;
+    .card-title {
+      color: $maroon;
+    }
+    .card-footer {
+      background-color: $maroon;
+      a {
+        color: white;
+      }
+      svg {
+        fill: white;
+      }
+    }
+  }
+  .ar & {
+    .card-content {
+      text-align: right;
+    }
+  }
+}
+.tab-arrow-btn {
+  position: absolute;
+  top: 50%;
+  margin-top: -25px;
+  width: 50px;
+  height: 50px;
+  fill: #a1222680;
+  cursor: pointer;
+  &:hover {
+    fill: #a12226;
+  }
+  &.left {
+    left: 20px;
+  }
+  &.right {
+    right: 20px;
+  }
+}

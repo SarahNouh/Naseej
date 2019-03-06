@@ -1,0 +1,51 @@
+// @Author: sarahnouh
+// @Date:   2019-03-04T03:08:16+02:00
+// @Last modified by:   sarahnouh
+// @Last modified time: 2019-03-04T17:10:24+02:00
+.carousel {
+  // position: absolute;
+  // top: 0;
+  // right: 0;
+  // left: 0;
+  // z-index: -1;
+  .carousel-image {
+    position: absolute;
+    top: 50%;
+    margin-top: -178px;
+    left: 10%;
+    width: 40%;
+  }
+  .carousel-content {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+    height: calc(100% - 100px);
+    .carousel-text {
+      position: absolute;
+      top: 50%;
+      margin-top: -81px;
+      width: 400px;
+      color: white;
+      right: 10%;
+      p {
+        max-height: 71px;
+        overflow: hidden;
+      }
+    }
+  }
+  .carousel-btn {
+    background-color: #a12226;
+    border-radius: 22px;
+    color: white;
+    padding: 10px 20px;
+  }
+  .carousel-indicators li {
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    &:hover {
+      opacity: 1;
+    }
+  }
+}

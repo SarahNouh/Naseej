@@ -1,0 +1,30 @@
+// @Author: sarahnouh
+// @Date:   2019-03-04T04:08:11+02:00
+// @Last modified by:   sarahnouh
+// @Last modified time: 2019-03-04T09:10:33+02:00
+.subnav {
+  margin-top: 10px;
+  .subnav-lang {
+    color: white;
+    font-weight: 800;
+  }
+  .subnav-search-icon {
+    position: relative;
+  }
+  .subnav-search-form {
+    position: absolute;
+    top: 0;
+    right: 40px;
+    width: 0;
+    overflow: hidden;
+    transition: width linear 1s;
+    input {
+      width: 100%;
+      border-radius: 0;
+      border: none;
+    }
+    &.is-shown {
+      width: 250px;
+    }
+  }
+}
